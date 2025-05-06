@@ -2,6 +2,8 @@ package com.example.service;
 
 import java.util.Optional;
 
+import javax.security.auth.login.LoginException;
+
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Account;
@@ -27,5 +29,12 @@ public class AccountService {
         }
         
         return accountRepository.save(account);
+    }
+    public Account login(Account account) throws LoginException {
+        Account duplicate = accountRepository.findOneByUsername(account.getUsername()).orElseThrow(()-> new LoginException("Unauthorized"));
+        if(account.getPassword() == null || !account.getPassword().equalsIgnoreCase(duplicate.getPassword())) {
+            throw new LoginException("Unauthorized");
+        }
+        return duplicate;
     }
 }

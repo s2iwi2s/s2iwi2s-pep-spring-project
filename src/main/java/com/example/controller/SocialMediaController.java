@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import javax.security.auth.login.LoginException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +36,9 @@ public class SocialMediaController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<Account> login(@RequestBody Account account) throws LoginException {
+        account = this.accountService.login(account);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
 }
