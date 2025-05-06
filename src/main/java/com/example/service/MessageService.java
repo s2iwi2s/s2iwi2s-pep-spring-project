@@ -33,4 +33,8 @@ public class MessageService {
     public List<Message> retrieveAllMessages() {
         return this.messageRepository.findAll();
     }
+
+    public Message retrieveMessageById(Integer messageId) {
+        return this.messageRepository.findById(messageId).orElse(null);
+    }
 }
