@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Account;
@@ -26,5 +28,9 @@ public class MessageService {
         //message.getPostedBy()
         accountRepository.findById(message.getPostedBy()).orElseThrow(() -> new ClientException("Client error"));
         return  this.messageRepository.save(message);
+    }
+
+    public List<Message> retrieveAllMessages() {
+        return this.messageRepository.findAll();
     }
 }

@@ -1,9 +1,12 @@
 package com.example.controller;
 
+import java.util.List;
+
 import javax.security.auth.login.LoginException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,5 +53,11 @@ public class SocialMediaController {
     public ResponseEntity<Message> createMessage(@RequestBody Message message) throws LoginException {
         message = this.messageService.createMessage(message);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+    
+    @GetMapping("/messages")
+    public ResponseEntity<List<Message>> retrieveAllMessages() throws LoginException {
+        List<Message> messages = this.messageService.retrieveAllMessages();
+        return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 }
