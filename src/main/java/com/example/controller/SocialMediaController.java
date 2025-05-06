@@ -6,6 +6,7 @@ import javax.security.auth.login.LoginException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,9 +62,16 @@ public class SocialMediaController {
         List<Message> messages = this.messageService.retrieveAllMessages();
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
+
     @GetMapping("/messages/{messageId}")
-    public ResponseEntity<Message> retrieveMessagesById(@PathVariable Integer messageId) throws LoginException {
+    public ResponseEntity<Message> retrieveMessageById(@PathVariable Integer messageId) throws LoginException {
         Message message = this.messageService.retrieveMessageById(messageId);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/messages/{messageId}")
+    public ResponseEntity<Integer> deleteMessageById(@PathVariable Integer messageId) {
+        Integer rows = this.messageService.deleteMessageById(messageId);
+        return new ResponseEntity<>(rows, HttpStatus.OK);
     }
 }

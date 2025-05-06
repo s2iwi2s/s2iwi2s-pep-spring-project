@@ -37,4 +37,17 @@ public class MessageService {
     public Message retrieveMessageById(Integer messageId) {
         return this.messageRepository.findById(messageId).orElse(null);
     }
+
+    public Integer deleteMessageById(Integer messageId) {
+        Integer rows = null;
+        if(messageId != null){
+            try {
+                this.messageRepository.deleteById(messageId);
+                rows = 1;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        return rows;
+    }
 }
