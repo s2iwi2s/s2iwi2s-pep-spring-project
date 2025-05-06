@@ -83,5 +83,9 @@ public class SocialMediaController {
         Integer rows = this.messageService.updateMessageById(messageId, message.getMessageText());
         return new ResponseEntity<>(rows, HttpStatus.OK);
     }
-
+    @GetMapping("/accounts/{accountId}/messages")
+    public ResponseEntity<List<Message>> getMessagesByAccountId(@PathVariable Integer accountId) throws LoginException {
+        List<Message> list = this.messageService.getMessagesByAccountId(accountId);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

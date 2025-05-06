@@ -70,4 +70,8 @@ public class MessageService {
         }
         return rows;
     }
+
+    public List<Message> getMessagesByAccountId(Integer accountId) {
+        return this.messageRepository.findByPostedBy(accountId);
+    }
 }
