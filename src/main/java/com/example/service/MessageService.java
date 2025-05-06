@@ -50,4 +50,24 @@ public class MessageService {
         }
         return rows;
     }
+
+    public Integer updateMessageById(Integer messageId, String text) throws ClientException {
+        if(text == null || text.length() == 0 || text.length() > 255) {
+            throw new ClientException("Invalid text");
+        }
+        Integer rows = null;
+        Message message = retrieveMessageById(messageId);
+        if(message == null){
+            throw new ClientException("Invalid text");
+        } else {
+            try {
+                message.setMessageText(text);
+                this.messageRepository.save(message);
+                rows = 1;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        return rows;
+    }
 }

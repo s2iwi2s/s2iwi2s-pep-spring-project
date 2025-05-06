@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,4 +75,13 @@ public class SocialMediaController {
         Integer rows = this.messageService.deleteMessageById(messageId);
         return new ResponseEntity<>(rows, HttpStatus.OK);
     }
+
+    @PatchMapping("/messages/{messageId}")
+    public ResponseEntity<Integer> updateMessageById(@PathVariable Integer messageId, @RequestBody Message message) throws ClientException {
+        System.out.println("messageId=" + messageId);
+        System.out.println("text=" + message.getMessageText());
+        Integer rows = this.messageService.updateMessageById(messageId, message.getMessageText());
+        return new ResponseEntity<>(rows, HttpStatus.OK);
+    }
+
 }
