@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Account;
+import com.example.entity.Message;
 import com.example.exception.ClientException;
 import com.example.exception.ConflictException;
 import com.example.repository.AccountRepository;
